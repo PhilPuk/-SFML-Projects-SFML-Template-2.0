@@ -1,0 +1,7 @@
+Steps to visualize merge sort:
+
+1. Colorize the currently selected array.
+2. Colorize the currently changed values.
+3. Once done reset color back to stock color.
+4. Move on with the next array from step one.
+5. Once no more locked at colorize the parts the are getting merged.
