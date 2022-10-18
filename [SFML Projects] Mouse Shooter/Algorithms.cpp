@@ -10,7 +10,7 @@ void Algorithms::initBrickManager(sf::Vector2u& winSize, std::vector<int>& array
 	this->bricks = new BrickManager(winSize, array, font, true);
 }
 
-Algorithms::Algorithms(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen)
+Algorithms::Algorithms(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen, bool UseBricks)
 {
 	this->initVariables();
 	this->initBrickManager(winSize, array, font, UsefullScreen);
@@ -203,18 +203,48 @@ void Algorithms::Merge_Sort(sf::RenderWindow& window, std::vector<int>& array, i
 	}
 }
 
+//For quick sort
 int partition(sf::RenderWindow& window, std::vector<int>& array, int low, int high)
 {
 	int pivot = array[array.size()];
 
 	int i = low - 1;
 
-	return pivot;
+	for(int j = low ; j < high; j++)
+	{
+		if(array[j] <= pivot)
+		{
+			this->setBricksColorRed(i,j);
+			this->renderWithBreak(window, 200);
+			this->swap(&array[i], &array[j]);
+			this->bricks.bricks[i].setTextInt(array[i]);
+			this->bricks.bricks[j].setTextInt(array[j]);
+			this->renderWithBreak(window, 200);
+			this->setBricksColorBlack(i, j);
+			i++;
+		}
+	}
+
+	this->setBricksColorRed(i + 1, high);
+	this->renderWithBreak(window, 200);
+	this->swap(&array[i + 1], &array[high]);
+	this->bricks.bricks[i + 1].setTextInt(array[i + 1]);
+	this->bricks.bricks[high].setTextInt(array[high]);
+	this->renderWithBreak(window, 200);
+	this->setBricksColorBlack(i + 1, high);
+
+	return i + 1;
 }
 
 void Quick_Sort(sf::RenderWindow& window, std::vector<int>& array, int low, int high)
 {
-
+	if(low < high)
+	{
+		int x = partition(window, array, low, high);
+		//Stackoverflow ???
+		Quick_Sort(window, array, low, x - 1);
+		Quick_Sort(window, array, x + 1, high);
+	}
 }
 
 
@@ -226,7 +256,9 @@ void Algorithms::currentSelectedAlgo(std::vector<int>& array, sf::RenderWindow& 
 
 		//this->Selection_Sort(array, window);
 
-		this->Merge_Sort(window, array, 0 , static_cast<int>(array.size()) - 1);
+		//this->Merge_Sort(window, array, 0 , static_cast<int>(array.size()) - 1);
+
+		this->Quick_Sort(window, array, 0, array.size());
 
 		this->algoFinished = true;
 	}

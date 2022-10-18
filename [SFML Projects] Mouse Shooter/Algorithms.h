@@ -17,7 +17,7 @@ private:
 	void initVariables();
 	void initBrickManager(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen);
 public:
-	Algorithms(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen);
+	Algorithms(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen, bool UseBricks);
 	virtual ~Algorithms();
 
 	//BrickManager
@@ -41,6 +41,7 @@ public:
 	void merge(sf::RenderWindow& window, std::vector<int>& array, int left_index, int mid_index, int right_index);
 	void Merge_Sort(sf::RenderWindow& window, std::vector<int>& array, int left_index, int right_index);
 
+	//Quick Sort
 	int partition(sf::RenderWindow& window, std::vector<int>& array, int low, int high);
 	void Quick_Sort(sf::RenderWindow& window, std::vector<int>& array, int low, int high);
 

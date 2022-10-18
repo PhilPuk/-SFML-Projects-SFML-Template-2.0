@@ -26,7 +26,7 @@ void Game::initGeneration()
 
 void Game::initAlgorithms(sf::Font& font)
 {
-    this->algo = new Algorithms(this->winSize, this->gen->array, font, true);
+    this->algo = new Algorithms(this->winSize, this->gen->array, font, true, false);
 }
 
 Game::Game(sf::RenderWindow* window, sf::Font& font)
@@ -75,7 +75,6 @@ const bool& Game::getEndApplication() const
 void Game::run()
 {
     //Main loop of the game
-
     while (!endGame)
     {
         this->update();

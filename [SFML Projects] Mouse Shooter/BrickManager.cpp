@@ -38,9 +38,11 @@ void BrickManager::initBricksFullScreen(sf::Vector2u& winSize, std::vector<int>&
 	//To-do
 	//calculate scaled size in reference to the window
 
+	//Old working
 	//float sizeX = 55.f;
 	//float sizeY = 50.f;
 
+	//New not tested!
 	float sizeX = static_cast<float>(winSize.x) / static_cast<float>(array.size()) - (static_cast<float>(winSize.x) * 0.01f);
 	float sizeY = static_cast<float>(winSize.x) / static_cast<float>(array.size()) - (static_cast<float>(winSize.x) * 0.01f);
 	sf::Vector2f size(sizeX, sizeY);
@@ -68,10 +70,33 @@ void BrickManager::initBricksFullScreen(sf::Vector2u& winSize, std::vector<int>&
 
 }
 
-BrickManager::BrickManager(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen)
+void initBricksAsDiagramm(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font)
+{
+	float spacing = static_cast<float>(winSize.x) / (static_cast<float>(array.size()) * 3.f);
+	float sizeX = static_cast<float>(winSize.x) / static_cast<float>(array.size()) - spacing;
+	float sizeY;
+	sf::Vector2f size(sizeX, sizeY);
+	float baseLineY = static_cast<float>(winSize.Y) - 30.f;
+	sf::Vector2f pos(spacing, baseLineY);
+
+	//Sets all elements of the diagramm almost on the bottom of the screen.
+	//Substracts that value - its size so it doesnt go to the bottom of the screen.
+	for(size_t i = 0; i < array.size(); i++)
+	{
+		size.Y = static_cast<float>(array[i]); 
+		pos.y = baseLineY - size.Y;
+		this->bricks.push_back(new Brick(font , pos, size));
+		this->bricks[i].setTextInt(&array[i]);
+		pos.x += spacing;
+	}
+}
+
+BrickManager::BrickManager(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen, bool UseBricks)
 {
 	this->initVariables();
-	if (UsefullScreen)
+	if(!UseBricks)
+		this->initBricksAsDiagramm(winSize, array, font);
+	else if (UsefullScreen)
 		this->initBricksFullScreen(winSize, array, font);
 	else
 		this->initBricksLine(winSize, array, font);
