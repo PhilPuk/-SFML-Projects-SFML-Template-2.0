@@ -203,6 +203,20 @@ void Algorithms::Merge_Sort(sf::RenderWindow& window, std::vector<int>& array, i
 	}
 }
 
+int partition(sf::RenderWindow& window, std::vector<int>& array, int low, int high)
+{
+	int pivot = array[array.size()];
+
+	int i = low - 1;
+
+	return pivot;
+}
+
+void Quick_Sort(sf::RenderWindow& window, std::vector<int>& array, int low, int high)
+{
+
+}
+
 
 void Algorithms::currentSelectedAlgo(std::vector<int>& array, sf::RenderWindow& window)
 {

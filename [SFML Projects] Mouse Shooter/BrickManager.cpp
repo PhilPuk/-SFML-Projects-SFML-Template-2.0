@@ -35,8 +35,14 @@ void BrickManager::initBricksLine(sf::Vector2u& winSize, std::vector<int>& array
 ///</summary>
 void BrickManager::initBricksFullScreen(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font)
 {
-	float sizeX = 55.f;
-	float sizeY = 50.f;
+	//To-do
+	//calculate scaled size in reference to the window
+
+	//float sizeX = 55.f;
+	//float sizeY = 50.f;
+
+	float sizeX = static_cast<float>(winSize.x) / static_cast<float>(array.size()) - (static_cast<float>(winSize.x) * 0.01f);
+	float sizeY = static_cast<float>(winSize.x) / static_cast<float>(array.size()) - (static_cast<float>(winSize.x) * 0.01f);
 	sf::Vector2f size(sizeX, sizeY);
 	float xSpacing = sizeX * 1.25f;
 	float ySpacing = sizeY * 1.5f;

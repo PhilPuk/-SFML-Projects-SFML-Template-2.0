@@ -41,6 +41,9 @@ public:
 	void merge(sf::RenderWindow& window, std::vector<int>& array, int left_index, int mid_index, int right_index);
 	void Merge_Sort(sf::RenderWindow& window, std::vector<int>& array, int left_index, int right_index);
 
+	int partition(sf::RenderWindow& window, std::vector<int>& array, int low, int high);
+	void Quick_Sort(sf::RenderWindow& window, std::vector<int>& array, int low, int high);
+
 	void currentSelectedAlgo(std::vector<int>& array, sf::RenderWindow& window);
 
 	void renderBrickManager(sf::RenderTarget& target);

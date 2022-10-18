@@ -9,6 +9,12 @@
 #include<SFML/Audio.hpp>
 #include<SFML/Network.hpp>
 
+//To-DO
+//Create vector between straight lines.
+//Delete left overs.
+//Curves stay as boxes.
+//
+
 class Tracing
 {
 private:
