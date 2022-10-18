@@ -21,13 +21,15 @@ Algorithms::~Algorithms()
 	delete this->bricks;
 }
 
+//Utility
+
 void Algorithms::setBricksColorRed(int i, int j)
 {
 	this->bricks->bricks[i]->shape.setOutlineColor(MARKED_COLOR);
 	this->bricks->bricks[j]->shape.setOutlineColor(MARKED_COLOR);
 }
 
-void setBrickToBaseColor(int index)
+void Algorithms::setBrickToBaseColor(int index)
 {
 	this->bricks->bricks[index]->shape.setOutlineColor(BASE_COLOR);
 }
@@ -38,7 +40,7 @@ void Algorithms::setBricksColorBlack(int i, int j)
 	this->bricks->bricks[j]->shape.setOutlineColor(BASE_COLOR);
 }
 
-void setBrickToMarkedColor(int index)
+void Algorithms::setBrickToMarkedColor(int index)
 {
 	this->bricks->bricks[index]->shape.setOutlineColor(MARKED_COLOR);
 }
@@ -48,6 +50,20 @@ void Algorithms::swopTwoInt(int* a, int* b)
 	int tmp = *a;
 	*a = *b;
 	*b = tmp;
+}
+
+void Algorithms::swopTwoDiagrammElements(int indexOne, int indexTwo, std::vector<int>& array)
+{
+	this->bricks->swopDiagrammElements
+	(
+		this->bricks->bricks[indexOne].getSize().y,
+	 	this->bricks->bricks[indexTwo].getSize().y,
+	 	indexOne,
+	 	indexTwo
+	 );
+	 this->swopTwoInt(&array[indexOne], &array[indexTwo]);
+	 this->bricks->bricks[indexOne].setTextInt(&array[indexOne]);
+	 this->bricks->bricks[indexOne].setTextInt(&array[indexTwo]);
 }
 
 void Algorithms::resetAlgoFinished()

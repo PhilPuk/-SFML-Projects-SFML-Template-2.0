@@ -24,11 +24,19 @@ public:
 	BrickManager* bricks;
 
 	//Utility
+		//All modes
+
 	void setBricksColorRed(int i, int j);
 	void setBrickToBaseColor(int index);
 	void setBricksColorBlack(int i, int j);
 	void setBrickToMarkedColor(int index);
 	void swopTwoInt(int* a, int* b);
+
+		//Block mode
+
+		//Diagramm mode
+	void swopTwoDiagrammElements(int indexOne, int indexTwo, std::vector<int>& array);
+
 
 	void resetAlgoFinished();
 	const bool& getAlgoFinished() const;

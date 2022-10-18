@@ -112,6 +112,16 @@ BrickManager::~BrickManager()
 	}
 }
 
+///<summary>
+///Swop the sizes of the given indexes
+///
+///</summary>
+void BrickManager::swopDiagrammElements(float sizeYOne, float sizeYTwo, int indexOne, int indexTwo)
+{
+	this->bricks[indexOne].setSize(this->bricks[indexOne].getSize().x, sizeYTwo);
+	this->bricks[indexTwo].setSize(this->bricks[indexTwo].getSize().x, sizeYOne);
+}
+
 void BrickManager::update(std::vector<int>* array)
 {
 

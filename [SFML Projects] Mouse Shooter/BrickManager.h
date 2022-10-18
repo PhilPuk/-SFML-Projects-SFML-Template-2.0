@@ -16,6 +16,8 @@ public:
 	BrickManager(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font, bool UsefullScreen, bool UseBricks);
 	virtual ~BrickManager();
 
+	void swopDiagrammElements(float sizeYOne, float sizeYTwo, int indexOne, int indexTwo);
+
 	std::vector<Brick*> bricks;
 
 	void update(std::vector<int>* array);
