@@ -5,6 +5,8 @@
 #include"BrickManager.h"
 
 #define PAUSE_TIMER 50
+#define BASE_COLOR sf::Color::Black
+#define MARKED_COLOR sf::Color::Red
 
 class Algorithms
 {
@@ -23,7 +25,9 @@ public:
 
 	//Utility
 	void setBricksColorRed(int i, int j);
+	void setBrickToBaseColor(int index);
 	void setBricksColorBlack(int i, int j);
+	void setBrickToMarkedColor(int index);
 	void swopTwoInt(int* a, int* b);
 
 	void resetAlgoFinished();
@@ -32,9 +36,9 @@ public:
 	//Algorithms
 	void Bubble_Sort(std::vector<int>& array, sf::RenderWindow& window);
 	void Selection_Sort(std::vector<int>& array, sf::RenderWindow& window);
+	
 	//Merge Sort
 	void merge(sf::RenderWindow& window, std::vector<int>& array, int left_index, int mid_index, int right_index);
-
 	void Merge_Sort(sf::RenderWindow& window, std::vector<int>& array, int left_index, int right_index);
 
 	void currentSelectedAlgo(std::vector<int>& array, sf::RenderWindow& window);

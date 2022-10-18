@@ -5,6 +5,10 @@ void BrickManager::initVariables()
 
 }
 
+///<summary>
+///Sets the bricks in a straight line in the center of the screen.
+///Ignores going beyond the window border.
+///</summary>
 void BrickManager::initBricksLine(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font)
 {
 	//Calculation for positioning
@@ -24,6 +28,11 @@ void BrickManager::initBricksLine(sf::Vector2u& winSize, std::vector<int>& array
 	}
 }
 
+///<summary>
+///Places bricks starting at the top left of the screen.
+///Goes to the left until the edge of the window is reached.
+///Then jumps into the the total left of the next line.
+///</summary>
 void BrickManager::initBricksFullScreen(sf::Vector2u& winSize, std::vector<int>& array, sf::Font& font)
 {
 	float sizeX = 55.f;

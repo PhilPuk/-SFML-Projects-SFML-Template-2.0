@@ -42,6 +42,8 @@ Game::~Game()
     delete this->gen;
 
     delete this->algo;
+
+    delete this->window;
 }
 
 void Game::CloseApplication()

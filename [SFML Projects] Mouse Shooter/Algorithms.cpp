@@ -23,14 +23,24 @@ Algorithms::~Algorithms()
 
 void Algorithms::setBricksColorRed(int i, int j)
 {
-	this->bricks->bricks[i]->shape.setOutlineColor(sf::Color::Red);
-	this->bricks->bricks[j]->shape.setOutlineColor(sf::Color::Red);
+	this->bricks->bricks[i]->shape.setOutlineColor(MARKED_COLOR);
+	this->bricks->bricks[j]->shape.setOutlineColor(MARKED_COLOR);
+}
+
+void setBrickToBaseColor(int index)
+{
+	this->bricks->bricks[index]->shape.setOutlineColor(BASE_COLOR);
 }
 
 void Algorithms::setBricksColorBlack(int i, int j)
 {
-	this->bricks->bricks[i]->shape.setOutlineColor(sf::Color::Black);
-	this->bricks->bricks[j]->shape.setOutlineColor(sf::Color::Black);
+	this->bricks->bricks[i]->shape.setOutlineColor(BASE_COLOR);
+	this->bricks->bricks[j]->shape.setOutlineColor(BASE_COLOR);
+}
+
+void setBrickToMarkedColor(int index)
+{
+	this->bricks->bricks[index]->shape.setOutlineColor(MARKED_COLOR);
 }
 
 void Algorithms::swopTwoInt(int* a, int* b)
@@ -90,13 +100,13 @@ void Algorithms::Selection_Sort(std::vector<int>& array, sf::RenderWindow& windo
 				this->setBricksColorRed(min_i, j);
 				if (array[min_i] > array[j])
 				{
-					this->bricks->bricks[min_i]->shape.setOutlineColor(sf::Color::Black);
+					this->setBrickToBaseColor(min_i);
 					min_i = j;
-					this->bricks->bricks[min_i]->shape.setOutlineColor(sf::Color::Red);
+					this->setBrickToMarkedColor(min_i);
 				}
 				this->render(window);
 				sf::sleep(sf::milliseconds(20));
-				this->bricks->bricks[j]->shape.setOutlineColor(sf::Color::Black);
+				this->setBrickToBaseColor(j);
 			}
 			//Swop values.
 			this->swopTwoInt(&array[min_i], &array[i]);
@@ -201,6 +211,7 @@ void Algorithms::currentSelectedAlgo(std::vector<int>& array, sf::RenderWindow& 
 		//this->Bubble_Sort(array, window);
 
 		//this->Selection_Sort(array, window);
+
 		this->Merge_Sort(window, array, 0 , static_cast<int>(array.size()) - 1);
 
 		this->algoFinished = true;
