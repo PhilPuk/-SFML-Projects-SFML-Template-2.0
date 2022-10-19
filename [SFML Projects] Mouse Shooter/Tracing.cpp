@@ -9,8 +9,8 @@ void Tracing::initVariables()
 void Tracing::initBox()
 {
 	this->box.setFillColor(sf::Color(255,0,0,100));
-	//this->box.setSize(sf::Vector2f(10.f, 10.f));
-	this->box.setRadius(5.f);
+	this->box.setSize(sf::Vector2f(10.f, 10.f));
+	//this->box.setRadius(5.f);
 
 	this->box.setPosition(sf::Vector2f(-100.f, -100.f));
 
@@ -29,18 +29,35 @@ Tracing::Tracing()
 
 Tracing::~Tracing()
 {
+	//Boxes deleting
 	for (int i = 0; i < this->traces.size(); i++)
 	{
 		delete this->traces[i];
 		this->traces.erase(this->traces.begin(), this->traces.end());
 	}
+
+	//2d vector boxes deleting
+	for(int i = 0; i < this->TwoDvectortraces.size(); i++)
+	{
+		delete this->TwoDvectortraces[i];
+		this->TwoDvectortraces.erase(this->TwoDvectortraces.begin(), this->TwoDvectortraces.end());
+	}
+
 	std::cout << "Traces vector size: " << this->traces.size() << "\n";
+	std::cout << "2D Vector Traces vector size: " << this->TwoDvectortraces.size() << "\n";
 }
 
 void Tracing::createNewTraceBox(const sf::Vector2f& pos)
 {
-	this->traces.push_back(new sf::CircleShape(box));
+	this->traces.push_back(new sf::RectangleShape(box));
 	this->traces[this->traces.size() - 1]->setPosition(pos);
+}
+
+void createNew2DVectorTraceBox(const sf::Vector2f& pos, float& angle)
+{
+	this->TwoDvectortraces.push_back(new sf::RectangleShape(box));
+	this->TwoDvectortraces[this->TwoDvectortraces.size() - 1].setPosition(pos);
+	this->TwoDvectortraces[this->TwoDvectortraces.size() - 1].setRotation(angle);
 }
 
 void Tracing::deleteSpecificTrace(int& index)
@@ -59,6 +76,7 @@ void Tracing::updateCMDMessages()
 	{
 		this->msgTime = 0.f;
 		std::cout << "Traces vector size: " << this->traces.size() << "\n";
+		std::cout << "2D Vector Traces vector size: " << this->TwoDvectortraces.size() << "\n";
 	}
 }
 
@@ -76,12 +94,37 @@ void Tracing::updateTraceDeletion(int& i)
 		this->deleteSpecificTrace(i);
 }
 
+bool updateVectorChecking(int& i)
+{
+	if(this->traces[i].getPosition() = sf::Vector2f
+	(
+			this->traces[i + 1].getPosition().x - this->traces[i + 1].getSize().x,
+		 	this->traces[i + 1].getPosition().y - this->traces[i + 1].getSize().y
+	))
+	return true;
+	else
+	return false;
+
+}
+
+void updateVectorCreation(int& i)
+{
+	//sf::Vector2f pos(this->traces[i].getPosition());
+	// to do calculate angle between the boxes//float angle = ;
+	this->createNew2DVectorTraceBox(this->traces[i].getPosition(), angle):
+
+	this->deleteSpecificTrace(i);
+}
+
 void Tracing::updateForLoop()
 {
 	for (int i = 0; i < this->traces.size(); i++)
 	{
 		this->updateOpacity(i);
 		this->updateTraceDeletion(i);
+
+		if(this->updateVectorChecking(i))
+		this->updateVectorCreation();
 	}
 }
 
@@ -89,6 +132,7 @@ void Tracing::update()
 {
 	this->updateCMDMessages();
 	this->updateForLoop();
+
 }
 
 void Tracing::renderTraces(sf::RenderTarget& target)
