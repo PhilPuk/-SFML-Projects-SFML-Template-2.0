@@ -1,1 +1,1 @@
-[SFML Projects] 2D 360 Degree shooting
+[SFML Projects] Template, may still includes old project files. Just delete them.
